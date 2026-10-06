@@ -32,7 +32,7 @@ a{text-decoration:none}
 @keyframes bfly{0%,100%{transform:translate3d(0,0,0) rotate(-4deg);opacity:.28}24%{transform:translate3d(18px,-20px,0) rotate(8deg);opacity:.62}51%{transform:translate3d(-11px,-38px,0) rotate(-5deg);opacity:.45}76%{transform:translate3d(14px,-13px,0) rotate(4deg);opacity:.58}}
 
 /* Apertura */
-.opening{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.86)),url(img/salon.webp) center/cover no-repeat,#000;transition:opacity 1s ease,visibility 1s ease}
+.opening{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.86)),url(img/techo.webp) center/cover no-repeat,#000;transition:opacity 1s ease,visibility 1s ease}
 .opening.is-open{opacity:0;visibility:hidden;pointer-events:none}
 .envelope-wrap{position:relative;width:min(88vw,400px);display:flex;flex-direction:column;align-items:center;gap:28px;animation:rise .9s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
@@ -70,7 +70,7 @@ a{text-decoration:none}
 .section{position:relative;padding:88px 22px;overflow:hidden}
 .inner{position:relative;max-width:640px;margin:auto}
 .light{background:radial-gradient(circle at 86% 16%,rgba(217,197,160,.18),transparent 24%),linear-gradient(135deg,#F3EFE6,#E5DFD0 57%,#D9C5A0)}
-.dark{background:linear-gradient(rgba(0,0,0,.70),rgba(0,0,0,.82)),var(--bg,none) center/cover no-repeat,#0a0a0a}
+.dark{background:linear-gradient(rgba(0,0,0,.56),rgba(0,0,0,.72)),var(--bg,none) center/cover no-repeat,#0a0a0a}
 .eyebrow{font-size:16px;letter-spacing:.22em;color:var(--bright)}
 .light .eyebrow{color:#8A6540}
 .title{font:400 clamp(3.2rem,13vw,5.6rem)/.95 "Great Vibes",cursive;margin:17px 0 27px;color:var(--champagne)}
@@ -172,7 +172,7 @@ footer.section{min-height:580px;display:flex;align-items:flex-end}
       </div>
     </section>
 
-    <section id="cuenta-regresiva" class="section dark" style="--bg:url(img/centro-mesa.jpg)">
+    <section id="cuenta-regresiva" class="section dark" style="--bg:url(img/mesa.webp)">
       <div class="inner reveal" style="text-align:center">
         <p class="eyebrow">31 DE OCTUBRE · 7:00 PM</p>
         <h2 class="title">La Fiesta Está Por Comenzar</h2>
@@ -200,7 +200,7 @@ footer.section{min-height:580px;display:flex;align-items:flex-end}
       </div>
     </section>
 
-    <section id="evento" class="section dark" style="--bg:url(img/salon.webp)">
+    <section id="evento" class="section dark" style="--bg:url(img/techo.webp)">
       <span class="butterfly" style="top:17%;right:9%;transform:scale(.68);animation-delay:-12s"><i></i></span>
       <div class="inner reveal">
         <p class="eyebrow">EL EVENTO</p>
@@ -225,7 +225,7 @@ footer.section{min-height:580px;display:flex;align-items:flex-end}
       </div>
     </section>
 
-    <section id="dress-code" class="section dark" style="--bg:url(img/regalo.webp);padding-top:64px;padding-bottom:64px">
+    <section id="dress-code" class="section dark" style="--bg:url(img/recuerdos.webp);padding-top:64px;padding-bottom:64px">
       <span class="butterfly" style="top:31%;right:11%;transform:scale(.67);animation-delay:-5s"><i></i></span>
       <div class="inner reveal" style="max-width:560px">
         <div class="gold-line" style="margin-bottom:28px"></div>
