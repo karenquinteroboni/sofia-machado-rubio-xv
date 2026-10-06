@@ -32,7 +32,7 @@ a{text-decoration:none}
 @keyframes bfly{0%,100%{transform:translate3d(0,0,0) rotate(-4deg);opacity:.28}24%{transform:translate3d(18px,-20px,0) rotate(8deg);opacity:.62}51%{transform:translate3d(-11px,-38px,0) rotate(-5deg);opacity:.45}76%{transform:translate3d(14px,-13px,0) rotate(4deg);opacity:.58}}
 
 /* Apertura */
-.opening{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.86)),url(img/techo.webp) center/cover no-repeat,#000;transition:opacity 1s ease,visibility 1s ease}
+.opening{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.7)),url(img/techo.webp) center/cover no-repeat,#000;transition:opacity 1s ease,visibility 1s ease}
 .opening.is-open{opacity:0;visibility:hidden;pointer-events:none}
 .envelope-wrap{position:relative;width:min(88vw,400px);display:flex;flex-direction:column;align-items:center;gap:28px;animation:rise .9s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
@@ -70,7 +70,9 @@ a{text-decoration:none}
 .section{position:relative;padding:88px 22px;overflow:hidden}
 .inner{position:relative;max-width:640px;margin:auto}
 .light{background:radial-gradient(circle at 86% 16%,rgba(217,197,160,.18),transparent 24%),linear-gradient(135deg,#F3EFE6,#E5DFD0 57%,#D9C5A0)}
-.dark{background:linear-gradient(rgba(0,0,0,.56),rgba(0,0,0,.72)),var(--bg,none) center/cover no-repeat,#0a0a0a}
+.dark{background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.58)),var(--bg,none) center/cover no-repeat,#0a0a0a}
+.dark .eyebrow,.dark .title,.dark .row,.dark .count-label,.dark p,.dark h2{text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.7)}
+.dark .count-card{background:rgba(0,0,0,.42)}
 .eyebrow{font-size:16px;letter-spacing:.22em;color:var(--bright)}
 .light .eyebrow{color:#8A6540}
 .title{font:400 clamp(3.2rem,13vw,5.6rem)/.95 "Great Vibes",cursive;margin:17px 0 27px;color:var(--champagne)}
@@ -139,7 +141,7 @@ footer.section{min-height:580px;display:flex;align-items:flex-end}
   </button>
   <input id="volume-control" type="range" min="0" max="100" value="45" aria-label="Volumen de la música">
 </div>
-<audio id="music" src="i-gotta-feeling.mp3" loop preload="auto"></audio>
+<audio id="music" src="i-gotta-feeling.mp3" preload="auto"></audio>
 
 <div id="site-content">
   <header id="inicio" class="hero">
@@ -278,6 +280,20 @@ const iconOff = document.getElementById("icon-off");
 
 music.volume = Number(volume.value) / 100;
 
+// La música arranca cuando empieza la voz ("I gotta feeling"), ~29 s del archivo.
+// Si el momento exacto no coincide, cambia solo este número (segundos).
+const MUSIC_START = 29;
+function playFromStart() {
+  const go = () => { music.currentTime = MUSIC_START; return music.play(); };
+  if (music.readyState >= 1) return go();
+  return new Promise((resolve, reject) => {
+    music.addEventListener("loadedmetadata", () => go().then(resolve, reject), { once: true });
+    music.load();
+  });
+}
+// Al terminar, vuelve a empezar desde la voz y no desde la introducción
+music.addEventListener("ended", () => { music.currentTime = MUSIC_START; music.play().catch(() => {}); });
+
 function setPlaying(on) {
   iconOn.style.display = on ? "" : "none";
   iconOff.style.display = on ? "none" : "";
@@ -287,7 +303,7 @@ function setPlaying(on) {
 
 document.getElementById("open-button").addEventListener("click", () => {
   opening.classList.add("is-opening");
-  music.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+  playFromStart().then(() => setPlaying(true)).catch(() => setPlaying(false));
   setTimeout(() => {
     opening.classList.add("is-open");
     content.classList.add("active");
