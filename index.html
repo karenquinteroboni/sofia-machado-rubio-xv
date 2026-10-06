@@ -141,7 +141,7 @@ footer.section{min-height:580px;display:flex;align-items:flex-end}
   </button>
   <input id="volume-control" type="range" min="0" max="100" value="45" aria-label="Volumen de la música">
 </div>
-<audio id="music" src="i-gotta-feeling.mp3" preload="auto"></audio>
+<audio id="music" src="cancion-sofia.mp3" preload="auto"></audio>
 
 <div id="site-content">
   <header id="inicio" class="hero">
@@ -280,9 +280,9 @@ const iconOff = document.getElementById("icon-off");
 
 music.volume = Number(volume.value) / 100;
 
-// La música arranca cuando empieza la voz ("I gotta feeling"), ~29 s del archivo.
+// Segundo del archivo desde el cual arranca la música (0 = desde el principio).
 // Si el momento exacto no coincide, cambia solo este número (segundos).
-const MUSIC_START = 29;
+const MUSIC_START = 0;
 function playFromStart() {
   const go = () => { music.currentTime = MUSIC_START; return music.play(); };
   if (music.readyState >= 1) return go();
